@@ -1,52 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import { Redirect } from 'react-router-dom';
-import styled from 'styled-components';
 import TreeView from './TreeView';
 import FileView from './FileView';
 import { fetchTreeData, fetchFileData } from '/src/components/Common/ApiServices';
+import { Header, BrowserContainer, TreeViewContainer, FileViewContainer } from './styling';
 
-const Container = styled.div`
-  display: flex;
-  flex-direction: row;
-  height: inherit;
-`;
-
-const TreeContainer = styled.div`
-  flex: 0 0 30%;
-  height: 100%;
-  overflow: scroll;
-`;
-
-const ContentContainer = styled.div`
-  flex: 1 0 70%;
-  height: 100%;
-  overflow: scroll;
-  padding: 10px 10px 10px 30px;
-
-  white-space: pre-wrap;
-
-  &:before {
-    counter-reset: listing;
-  }
-
-  & plaintext {
-    counter-increment: listing;
-    margin: 2px;
-  }
-
-  & plaintext::before {
-    content: counter(listing) ". ";
-    display: inline-block;
-    color: #4d556a;
-    width: 50px;
-    margin-left: auto;
-    margin-right: 25px;
-    text-align: right;
-    border-right: 1px solid #4d556a;
-  }
-`;
-
-const BrowserContainer = ({ match, location }) => {
+const Browser = ({ match, location }) => {
   const { params: { owner, repo } } = match;
 
   const defaultData = {
@@ -92,20 +51,28 @@ const BrowserContainer = ({ match, location }) => {
     );
   }
 
+  const headerText = `${owner} / ${repo}`;
+
   return (
-    <Container>
-      <TreeContainer>
-        <TreeView
-          data={data}
-          onTreeToggle={onTreeToggleHandler}
-          onFileSelect={onFileSelectHandler}
-        />
-      </TreeContainer>
-      <ContentContainer>
-        <FileView fileText={fileText} />
-      </ContentContainer>
-    </Container>
+    <>
+      <Header>
+        <i className="fa fa-bookmark-o"></i>
+        <span>{ headerText }</span>
+      </Header>
+      <BrowserContainer>
+        <TreeViewContainer>
+          <TreeView
+            data={data}
+            onTreeToggle={onTreeToggleHandler}
+            onFileSelect={onFileSelectHandler}
+          />
+        </TreeViewContainer>
+        <FileViewContainer>
+          <FileView fileText={fileText} />
+        </FileViewContainer>
+      </BrowserContainer>
+    </>
   );
 };
 
-export default BrowserContainer;
+export default Browser;
