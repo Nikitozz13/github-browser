@@ -1,14 +1,23 @@
-import React, { Component} from "react";
-import "./App.css";
+import React from 'react';
+import { Switch, Route } from 'react-router-dom';
+import HomePage from './components/HomePage';
+import BrowserContainer from './components/Browser/BrowserContainer';
+import NotFoundPage from './components/NotFoundPage';
+import ErrorPage from './components/ErrorPage';
 
-class App extends Component{
-  render(){
-    return(
-      <div className="App">
-        <h1> Hello, World! </h1>
-      </div>
-    );
-  }
+import './App.css';
+
+const App = () => {
+  return (
+    <div className="App">
+      <Switch>
+        <Route exact path="/" component={HomePage} />
+        <Route path="/:owner/:repo" component={BrowserContainer} />
+        <Route exact path="/error" render={(props) => <ErrorPage {...props}/>}/>
+        <Route component={NotFoundPage} />
+      </Switch>
+    </div>
+  );
 }
 
 export default App;
