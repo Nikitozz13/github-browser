@@ -1,7 +1,7 @@
 import React from 'react';
 import { Switch, Route } from 'react-router-dom';
 import HomePage from './components/HomePage';
-import BrowserContainer from './components/Browser/BrowserContainer';
+import Browser from './components/Browser';
 import NotFoundPage from './components/NotFoundPage';
 import ErrorPage from './components/ErrorPage';
 
@@ -12,8 +12,8 @@ const App = () => {
     <div className="App">
       <Switch>
         <Route exact path="/" component={HomePage} />
-        <Route path="/:owner/:repo" component={BrowserContainer} />
         <Route exact path="/error" render={(props) => <ErrorPage {...props}/>}/>
+        <Route path="/:owner/:repo" component={Browser} />
         <Route component={NotFoundPage} />
       </Switch>
     </div>

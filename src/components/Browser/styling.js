@@ -4,13 +4,23 @@ export const Header = styled.div`
   display: flex;
   align-items: center;
   height: 50px;
-  padding: 10px 15px;
   font-weight: bold;
   background-color: #1f2128;
+`;
+
+export const RepositoryTitle = styled.div`
+  flex: 0 0 30%;
+  min-width: 250px;
+  padding: 10px 15px;
 
   & > i {
     padding-right: 10px;
   }
+`;
+
+export const RepositoryPath = styled.div`
+  flex: 1 0 auto;
+  padding: 10px 15px;
 `;
 
 export const BrowserContainer = styled.div`
